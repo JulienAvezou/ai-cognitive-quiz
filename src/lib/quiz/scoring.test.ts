@@ -1,0 +1,43 @@
+import { describe, expect, it } from "vitest";
+import { quizQuestions } from "./quiz-data";
+import { calculateQuizResult, dimensionKeys } from "./scoring";
+
+describe("calculateQuizResult", () => {
+  it("returns architect for consistently high-ownership answers", () => {
+    const answerIds = quizQuestions.map((question) => question.options[0].id);
+    const result = calculateQuizResult(answerIds);
+
+    expect(result.archetype).toBe("architect");
+    expect(result.driftRisk).toBe("Low");
+    expect(result.dimensions.ownership).toBeGreaterThan(90);
+    expect(result.dimensions.dependency).toBeLessThan(20);
+  });
+
+  it("returns passenger for consistently high-dependency answers", () => {
+    const answerIds = quizQuestions.map((question) => question.options[3].id);
+    const result = calculateQuizResult(answerIds);
+
+    expect(result.archetype).toBe("passenger");
+    expect(result.driftRisk).toBe("High");
+    expect(result.dimensions.dependency).toBeGreaterThan(80);
+    expect(result.dimensions.verification).toBeLessThan(30);
+  });
+
+  it("normalizes every dimension between 0 and 100", () => {
+    const answerIds = quizQuestions.map((question, index) =>
+      question.options[index % question.options.length].id,
+    );
+    const result = calculateQuizResult(answerIds);
+
+    dimensionKeys.forEach((dimension) => {
+      expect(result.dimensions[dimension]).toBeGreaterThanOrEqual(0);
+      expect(result.dimensions[dimension]).toBeLessThanOrEqual(100);
+    });
+  });
+
+  it("is deterministic for the same answer set", () => {
+    const answerIds = quizQuestions.map((question) => question.options[1].id);
+
+    expect(calculateQuizResult(answerIds)).toEqual(calculateQuizResult(answerIds));
+  });
+});
