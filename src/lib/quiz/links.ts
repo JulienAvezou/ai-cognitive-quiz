@@ -1,5 +1,6 @@
-export const gumroadUrl = "https://javz.gumroad.com/l/the-thinking-engineer-toolkit";
-export const productionQuizUrl = "https://YOUR-QUIZ-URL-HERE";
+export const gumroadUrl =
+  "https://javz.gumroad.com/l/the-thinking-engineer-toolkit";
+export const productionQuizUrl = "https://ai-cognitive-quiz.vercel.app";
 
 const localHostnames = new Set(["localhost", "127.0.0.1", "::1"]);
 
