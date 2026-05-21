@@ -49,7 +49,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q1_d",
         label:
-          "Ask AI to generate the feature and rely on testing later to reveal gaps.",
+          "Use AI to get a working version quickly, then depend on later testing and review to expose requirement gaps.",
         scores: {
           ownership: -2,
           reflection: -1,
@@ -109,7 +109,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q2_d",
         label:
-          "Let AI choose the library and shape the integration unless it visibly breaks.",
+          "Let AI propose the library and integration shape, then adjust if the implementation conflicts with the app.",
         scores: {
           ownership: -2,
           reflection: -2,
@@ -156,7 +156,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q3_c",
         label:
-          "Ask AI for a patch, run the failing path, and iterate until the symptom disappears.",
+          "Ask AI for a likely patch, run the failing path, and iterate quickly around the observed symptom.",
         scores: {
           ownership: 0,
           reflection: 0,
@@ -229,7 +229,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q4_d",
         label:
-          "Trust the output if it compiles cleanly and the implementation matches the prompt.",
+          "Prioritize compile errors, integration fit, and obvious edge cases before doing a deeper pass only if the change feels risky.",
         scores: {
           ownership: -2,
           reflection: -2,
@@ -275,7 +275,8 @@ export const quizQuestions: QuizQuestion[] = [
       },
       {
         id: "q5_c",
-        label: "Generate tests with AI and focus on getting the suite green quickly.",
+        label:
+          "Use AI to generate the first test pass, then focus mainly on getting useful coverage into the suite quickly.",
         scores: {
           ownership: 0,
           reflection: 0,
@@ -348,7 +349,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q6_d",
         label:
-          "Let AI reshape the module because the current version is already hard to reason about.",
+          "Use AI's broader rewrite as a way to simplify the module, then rely on review and tests to catch behavior drift.",
         scores: {
           ownership: -2,
           reflection: -1,
@@ -395,7 +396,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q7_c",
         label:
-          "Use AI's recommendation as the default unless a teammate raises a strong objection.",
+          "Use AI's recommendation as the starting default, then adjust if team context or constraints point elsewhere.",
         scores: {
           ownership: 0,
           reflection: 0,
@@ -408,7 +409,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q7_d",
         label:
-          "Ask AI for the modern best practice and implement that path to avoid overthinking.",
+          "Ask AI for the common current pattern and move with it unless the system has a clear reason to diverge.",
         scores: {
           ownership: -1,
           reflection: -1,
@@ -467,7 +468,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q8_d",
         label:
-          "I mostly rely on AI to apply the pattern correctly because it has seen more examples.",
+          "I let AI apply the pattern and learn it through the implementation details as I review the result.",
         scores: {
           ownership: -2,
           reflection: -2,
@@ -527,7 +528,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q9_d",
         label:
-          "Keep it if it works and ask AI for help later if the code becomes a problem.",
+          "Keep the working version for now, add a light note to revisit it, and dig deeper if the area changes again.",
         scores: {
           ownership: -2,
           reflection: -2,
@@ -646,7 +647,7 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: "q11_d",
         label:
-          "Minimal docs because the code and AI transcript can explain the context if needed.",
+          "Keep docs minimal and rely on the code, PR context, and AI transcript to preserve the reasoning if it becomes relevant.",
         scores: {
           ownership: -2,
           reflection: -1,
