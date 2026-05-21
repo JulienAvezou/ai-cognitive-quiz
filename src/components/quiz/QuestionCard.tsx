@@ -42,17 +42,20 @@ export function QuestionCard({
           const isSelected = selectedAnswerId === option.id;
 
           return (
-            <button
+            <label
               key={option.id}
-              type="button"
               className={`option-button ${isSelected ? "is-selected" : ""}`}
-              role="radio"
-              aria-checked={isSelected}
-              onClick={() => onSelect(option.id)}
             >
+              <input
+                className="option-input"
+                type="radio"
+                name={question.id}
+                checked={isSelected}
+                onChange={() => onSelect(option.id)}
+              />
               <span className="option-index">{String.fromCharCode(65 + index)}</span>
               <span>{option.label}</span>
-            </button>
+            </label>
           );
         })}
       </div>

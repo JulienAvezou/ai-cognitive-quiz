@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
+import { useRef, useState } from "react";
 import { archetypes } from "../../lib/quiz/archetypes";
 import { getQuizUrl, gumroadUrl } from "../../lib/quiz/links";
 import type { DimensionKey, QuizResult } from "../../lib/quiz/types";
@@ -30,12 +30,10 @@ export function ResultPage({
 }: ResultPageProps) {
   const archetype = archetypes[result.archetype];
   const shareCardRef = useRef<HTMLDivElement>(null);
-  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "manual">(
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "manual">("idle");
+  const [downloadStatus, setDownloadStatus] = useState<"idle" | "working" | "failed">(
     "idle",
   );
-  const [downloadStatus, setDownloadStatus] = useState<
-    "idle" | "working" | "failed"
-  >("idle");
   const quizUrl = getQuizUrl();
 
   const shareText = `I got ${archetype.name} on the AI Cognitive Archetype Quiz.\n\n${archetype.identity}\n\nTake the quiz: ${quizUrl}`;
@@ -108,6 +106,18 @@ export function ResultPage({
           </strong>
         </div>
 
+        <div className="drivers-panel">
+          <h2>Why this result</h2>
+          <div className="driver-list">
+            {result.scoreDrivers.map((driver) => (
+              <div className="driver-row" key={driver.label}>
+                <span>{driver.label}</span>
+                <strong>{driver.value}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="dimension-panel">
           <h2>Dimension profile</h2>
           <div className="dimension-list">
@@ -158,8 +168,8 @@ export function ResultPage({
             <span className="mono-label">Recommended resource</span>
             <h2>{archetype.recommendedResource}</h2>
             <p>
-              The Thinking Engineer Toolkit helps developers use AI without
-              outsourcing their judgment.
+              The Thinking Engineer Toolkit helps developers use AI without outsourcing
+              their judgment.
             </p>
           </div>
           <a
@@ -177,11 +187,7 @@ export function ResultPage({
         <ShareCard ref={shareCardRef} result={result} quizUrl={quizUrl} />
 
         <div className="share-actions">
-          <button
-            type="button"
-            className="primary-button"
-            onClick={copyShareText}
-          >
+          <button type="button" className="primary-button" onClick={copyShareText}>
             Copy share text
           </button>
           <button

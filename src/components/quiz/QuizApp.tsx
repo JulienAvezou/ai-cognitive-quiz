@@ -33,9 +33,7 @@ const initialState: QuizState = {
 };
 
 function getOrderedAnswerIds(selectedAnswers: Record<string, string>) {
-  return quizQuestions
-    .map((question) => selectedAnswers[question.id])
-    .filter(Boolean);
+  return quizQuestions.map((question) => selectedAnswers[question.id]).filter(Boolean);
 }
 
 function shuffleIds(ids: string[]) {
@@ -70,9 +68,7 @@ function getQuestionWithOrderedOptions(
   return {
     ...question,
     options: optionOrder
-      .map((optionId) =>
-        question.options.find((option) => option.id === optionId),
-      )
+      .map((optionId) => question.options.find((option) => option.id === optionId))
       .filter((option): option is (typeof question.options)[number] => Boolean(option)),
   };
 }
@@ -182,8 +178,7 @@ export function QuizApp() {
             <h1 id="intro-title">AI Cognitive Archetype Quiz</h1>
             <p>
               A focused diagnostic for how you use AI in real engineering work:
-              ownership, reflection, verification, leverage, dependency, and
-              speed bias.
+              ownership, reflection, verification, leverage, dependency, and speed bias.
             </p>
             <div className="intro-actions">
               <button
@@ -234,16 +229,15 @@ export function QuizApp() {
         </section>
       )}
 
-      {(state.status === "result" || state.status === "share") &&
-        state.result && (
-          <ResultPage
-            result={state.result}
-            shareMode={state.status === "share"}
-            onRetake={() => dispatch({ type: "RETAKE" })}
-            onOpenShare={() => dispatch({ type: "OPEN_SHARE" })}
-            onCloseShare={() => dispatch({ type: "CLOSE_SHARE" })}
-          />
-        )}
+      {(state.status === "result" || state.status === "share") && state.result && (
+        <ResultPage
+          result={state.result}
+          shareMode={state.status === "share"}
+          onRetake={() => dispatch({ type: "RETAKE" })}
+          onOpenShare={() => dispatch({ type: "OPEN_SHARE" })}
+          onCloseShare={() => dispatch({ type: "CLOSE_SHARE" })}
+        />
+      )}
     </main>
   );
 }

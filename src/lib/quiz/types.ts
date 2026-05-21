@@ -8,11 +8,7 @@ export type DimensionKey =
 
 export type DimensionScores = Record<DimensionKey, number>;
 
-export type ArchetypeId =
-  | "architect"
-  | "balancer"
-  | "autopilot"
-  | "passenger";
+export type ArchetypeId = "architect" | "balancer" | "autopilot" | "passenger";
 
 export type DriftRisk = "Low" | "Moderate" | "High";
 
@@ -38,8 +34,14 @@ export type QuizResult = {
   dimensions: NormalizedDimensions;
   rawDimensions: DimensionScores;
   archetypeScores: ArchetypeScoreMap;
+  scoreDrivers: ScoreDriver[];
   driftRisk: DriftRisk;
   driftScore: number;
+};
+
+export type ScoreDriver = {
+  label: string;
+  value: number;
 };
 
 export type ArchetypeMeta = {

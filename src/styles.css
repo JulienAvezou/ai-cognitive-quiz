@@ -238,6 +238,7 @@ li + li {
 .intro-visual-card,
 .quiz-panel,
 .dimension-panel,
+.drivers-panel,
 .actions-panel,
 .toolkit-panel,
 .insight-grid > div {
@@ -453,13 +454,29 @@ li + li {
   padding: 16px;
   background: rgba(2, 6, 23, 0.28);
   color: #cbd5e1;
+  cursor: pointer;
   text-align: left;
   line-height: 1.5;
+}
+
+.option-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 .option-button:hover {
   border-color: rgba(96, 165, 250, 0.38);
   background: rgba(15, 23, 42, 0.72);
+}
+
+.option-button:has(.option-input:focus-visible) {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
 .option-button.is-selected {
@@ -572,6 +589,7 @@ li + li {
 }
 
 .dimension-panel,
+.drivers-panel,
 .actions-panel,
 .toolkit-panel,
 .insight-grid > div {
@@ -580,6 +598,7 @@ li + li {
 }
 
 .dimension-panel,
+.drivers-panel,
 .insight-grid,
 .actions-panel,
 .toolkit-panel {
@@ -587,11 +606,37 @@ li + li {
 }
 
 .dimension-panel h2,
+.drivers-panel h2,
 .insight-grid h2,
 .actions-panel h2,
 .toolkit-panel h2 {
   font-size: 1rem;
   letter-spacing: 0;
+}
+
+.driver-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.driver-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: rgba(2, 6, 23, 0.28);
+  color: #cbd5e1;
+}
+
+.driver-row strong {
+  color: var(--text);
+  font-family:
+    "SFMono-Regular", "Cascadia Code", "Roboto Mono", ui-monospace, monospace;
+  font-size: 0.88rem;
 }
 
 .dimension-list {
@@ -781,8 +826,12 @@ li + li {
   padding: 12px;
   background: rgba(2, 6, 23, 0.62);
   color: #cbd5e1;
-  font: 0.86rem/1.55 "SFMono-Regular", "Cascadia Code", "Roboto Mono",
-    ui-monospace, monospace;
+  font:
+    0.86rem / 1.55 "SFMono-Regular",
+    "Cascadia Code",
+    "Roboto Mono",
+    ui-monospace,
+    monospace;
 }
 
 .theme-emerald .dimension-track div,
@@ -881,10 +930,10 @@ li + li {
   *,
   *::before,
   *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    scroll-behavior: auto;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 

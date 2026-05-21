@@ -275,8 +275,7 @@ export const quizQuestions: QuizQuestion[] = [
       },
       {
         id: "q5_c",
-        label:
-          "Generate tests with AI and focus on getting the suite green quickly.",
+        label: "Generate tests with AI and focus on getting the suite green quickly.",
         scores: {
           ownership: 0,
           reflection: 0,
@@ -424,8 +423,7 @@ export const quizQuestions: QuizQuestion[] = [
   {
     id: "q8",
     eyebrow: "Learning",
-    prompt:
-      "AI shows you a pattern you have not used before. What happens next?",
+    prompt: "AI shows you a pattern you have not used before. What happens next?",
     options: [
       {
         id: "q8_a",
@@ -635,8 +633,7 @@ export const quizQuestions: QuizQuestion[] = [
       },
       {
         id: "q11_c",
-        label:
-          "AI-generated docs that describe the final behavior and setup steps.",
+        label: "AI-generated docs that describe the final behavior and setup steps.",
         scores: {
           ownership: 0,
           reflection: 0,

@@ -8,6 +8,7 @@ import type {
   NormalizedDimensions,
   QuizQuestion,
   QuizResult,
+  ScoreDriver,
 } from "./types";
 
 export const dimensionKeys: DimensionKey[] = [
@@ -69,14 +70,8 @@ export function normalizeDimensions(
 export function calculateArchetypeScores(
   dimensions: NormalizedDimensions,
 ): ArchetypeScoreMap {
-  const {
-    ownership,
-    reflection,
-    dependency,
-    leverage,
-    verification,
-    speedBias,
-  } = dimensions;
+  const { ownership, reflection, dependency, leverage, verification, speedBias } =
+    dimensions;
 
   return {
     architect:
@@ -145,6 +140,67 @@ export function pickArchetype(scores: ArchetypeScoreMap): ArchetypeId {
   })[0][0];
 }
 
+export function getScoreDrivers(
+  archetype: ArchetypeId,
+  dimensions: NormalizedDimensions,
+): ScoreDriver[] {
+  const drivers: Record<ArchetypeId, ScoreDriver[]> = {
+    architect: [
+      { label: "High ownership", value: dimensions.ownership * 0.3 },
+      { label: "High reflection", value: dimensions.reflection * 0.25 },
+      { label: "Strong verification", value: dimensions.verification * 0.25 },
+      {
+        label: "Controlled AI dependency",
+        value: (100 - dimensions.dependency) * 0.2,
+      },
+    ],
+    balancer: [
+      { label: "Strong ownership", value: dimensions.ownership * 0.25 },
+      { label: "Productive AI leverage", value: dimensions.leverage * 0.25 },
+      { label: "Steady reflection", value: dimensions.reflection * 0.2 },
+      { label: "Verification habit", value: dimensions.verification * 0.15 },
+      {
+        label: "Controlled dependency",
+        value: (100 - dimensions.dependency) * 0.15,
+      },
+    ],
+    autopilot: [
+      { label: "High AI leverage", value: dimensions.leverage * 0.25 },
+      { label: "High speed bias", value: dimensions.speedBias * 0.25 },
+      { label: "Rising AI dependency", value: dimensions.dependency * 0.2 },
+      {
+        label: "Lower reflection",
+        value: (100 - dimensions.reflection) * 0.15,
+      },
+      {
+        label: "Lower verification",
+        value: (100 - dimensions.verification) * 0.15,
+      },
+    ],
+    passenger: [
+      { label: "High AI dependency", value: dimensions.dependency * 0.35 },
+      { label: "High speed bias", value: dimensions.speedBias * 0.2 },
+      {
+        label: "Lower ownership",
+        value: (100 - dimensions.ownership) * 0.2,
+      },
+      {
+        label: "Lower reflection",
+        value: (100 - dimensions.reflection) * 0.15,
+      },
+      {
+        label: "Lower verification",
+        value: (100 - dimensions.verification) * 0.1,
+      },
+    ],
+  };
+
+  return [...drivers[archetype]]
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 3)
+    .map((driver) => ({ ...driver, value: round(driver.value) }));
+}
+
 export function calculateQuizResult(
   selectedAnswerIds: string[],
   questions: QuizQuestion[] = quizQuestions,
@@ -169,6 +225,7 @@ export function calculateQuizResult(
   const dimensions = normalizeDimensions(rawDimensions, questions);
   const archetypeScores = calculateArchetypeScores(dimensions);
   const archetype = pickArchetype(archetypeScores);
+  const scoreDrivers = getScoreDrivers(archetype, dimensions);
   const { driftRisk, driftScore } = getDriftRisk(dimensions);
 
   return {
@@ -176,6 +233,7 @@ export function calculateQuizResult(
     dimensions,
     rawDimensions,
     archetypeScores,
+    scoreDrivers,
     driftRisk,
     driftScore,
   };

@@ -15,6 +15,8 @@ The app is frontend-only. It does not use a backend, persistence, analytics, or 
 - React
 - TypeScript
 - Vitest
+- Playwright
+- Biome
 - `html-to-image` for result card PNG export
 
 ## Local Development
@@ -34,10 +36,14 @@ pnpm dev
 Run verification:
 
 ```bash
+pnpm lint
 pnpm typecheck
 pnpm test
+pnpm test:e2e
 pnpm build
 ```
+
+GitHub Actions runs the same verification flow on pushes and pull requests to `main`.
 
 ## Project Structure
 
